@@ -94,7 +94,7 @@
         </where>
     </sql>
     <sql id="sql_order">
-        order by s_time
+        order by c_time
     </sql>
 
     <select id="findByParams_count" parameterType="java.util.HashMap" resultType="int">

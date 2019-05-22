@@ -19,4 +19,6 @@ public interface IUserSummaryDAO {
      */
     int useTimes(int uid);
 
+    int  updateGrandPrize(int uid,int grandPrize);
+
 }

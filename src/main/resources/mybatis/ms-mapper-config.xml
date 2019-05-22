@@ -17,6 +17,8 @@
         <typeAlias alias="User" type="com.ms.pojo.User"/>
         <typeAlias alias="UserInvite" type="com.ms.pojo.UserInvite"/>
         <typeAlias alias="UserSummary" type="com.ms.pojo.UserSummary"/>
+        <typeAlias alias="UserDetail" type="com.ms.pojo.UserDetail"/>
+        <typeAlias alias="PrizeTime" type="com.ms.pojo.PrizeTime"/>
     </typeAliases>
 
     <plugins>
@@ -28,6 +30,8 @@
         <mapper resource="mybatis/user_sqlmap.xml" />
         <mapper resource="mybatis/userinvite_sqlmap.xml" />
         <mapper resource="mybatis/usersummary_sqlmap.xml" />
+        <mapper resource="mybatis/userdetail_sqlmap.xml" />
+        <mapper resource="mybatis/prizetime_sqlmap.xml" />
     </mappers>
 
 </configuration>

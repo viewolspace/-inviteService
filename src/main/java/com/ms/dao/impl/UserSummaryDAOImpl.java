@@ -16,6 +16,9 @@ import java.util.Map;
 public class UserSummaryDAOImpl  extends BaseDAO<UserSummary> implements IUserSummaryDAO{
     @Override
     public int incTimes(UserSummary userSummary) {
+        Date date = new Date();
+        userSummary.setcTime(date);
+        userSummary.setmTime(date);
         return super.insert(userSummary);
     }
 
@@ -30,5 +33,13 @@ public class UserSummaryDAOImpl  extends BaseDAO<UserSummary> implements IUserSu
         map.put("uid",uid);
         map.put("mTime",new Date());
         return super.updateBy("useTimes",map);
+    }
+
+    @Override
+    public int updateGrandPrize(int uid, int grandPrize) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("uid",uid);
+        map.put("grandPrize",grandPrize);
+        return super.updateBy("updateGrandPrize",map);
     }
 }

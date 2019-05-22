@@ -45,4 +45,13 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
         map.put("mTime",new Date());
         return super.updateBy("update_commit_status",map);
     }
+
+    @Override
+    public int updateGameResult(int uid, int gameResult) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("uid",uid);
+        map.put("gameResult",gameResult);
+        map.put("mTime",new Date());
+        return super.updateBy("update_game_result",map);
+    }
 }

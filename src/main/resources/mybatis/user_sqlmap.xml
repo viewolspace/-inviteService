@@ -16,7 +16,7 @@
 
 	</sql>
 
-    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyColumn="uid" keyProperty="uid">
         <selectKey keyProperty="uid" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -47,6 +47,10 @@
 
     <update id="update_commit_status" parameterType="map">
         update user set commit_status = #{commitStatus} , m_time=#{mTime} where uid = #{uid} and commit_status != #{commitStatus}
+    </update>
+
+    <update id="update_game_result" parameterType="map">
+        update user set game_result = #{gameResult} , m_time=#{mTime} where uid = #{uid} and game_result != #{gameResult}
     </update>
     
 

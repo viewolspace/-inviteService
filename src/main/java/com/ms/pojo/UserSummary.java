@@ -11,7 +11,7 @@ public class UserSummary {
     private int times;
     private int useTimes;
     private int allTimes;
-    private int grandPrize;
+    private int grandPrize; // 0 未中奖  1 中奖
     private Date cTime;
     private Date mTime;
     private int version;

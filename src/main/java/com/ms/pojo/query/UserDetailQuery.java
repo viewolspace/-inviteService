@@ -4,23 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by lenovo on 2019/5/21.
+ * Created by lenovo on 2019/5/22.
  */
-public class UserInviteQuery {
+public class UserDetailQuery {
     private Integer uid;
-
     private String openId;
-
+    private String thirdId;
+    private Integer prize;
     private String nickName;
 
-    private String inviteOpenId;
-
-    private String inviteNickName;
-
-    private int pageIndex = 1;
-
-    private int pageSize = 20;
-
+    private int pageIndex=1;
+    private int pageSize=20;
 
     public Integer getUid() {
         return uid;
@@ -38,28 +32,28 @@ public class UserInviteQuery {
         this.openId = openId;
     }
 
+    public String getThirdId() {
+        return thirdId;
+    }
+
+    public void setThirdId(String thirdId) {
+        this.thirdId = thirdId;
+    }
+
+    public Integer getPrize() {
+        return prize;
+    }
+
+    public void setPrize(Integer prize) {
+        this.prize = prize;
+    }
+
     public String getNickName() {
         return nickName;
     }
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getInviteOpenId() {
-        return inviteOpenId;
-    }
-
-    public void setInviteOpenId(String inviteOpenId) {
-        this.inviteOpenId = inviteOpenId;
-    }
-
-    public String getInviteNickName() {
-        return inviteNickName;
-    }
-
-    public void setInviteNickName(String inviteNickName) {
-        this.inviteNickName = inviteNickName;
     }
 
     public int getPageIndex() {
@@ -91,11 +85,11 @@ public class UserInviteQuery {
             map.put("nickName",nickName);
         }
 
-        if(inviteOpenId!=null){
-            map.put("inviteOpenId",inviteOpenId);
+        if(thirdId!=null){
+            map.put("thirdId",thirdId);
         }
-        if(inviteNickName!=null){
-            map.put("inviteNickName",inviteNickName);
+        if(prize!=null){
+            map.put("prize",prize);
         }
         return map;
     }

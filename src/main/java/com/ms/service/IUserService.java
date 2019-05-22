@@ -1,6 +1,9 @@
 package com.ms.service;
 
 import com.ms.pojo.User;
+import com.ms.pojo.UserInvite;
+import com.ms.pojo.query.UserInviteQuery;
+import com.youguu.core.util.PageHolder;
 
 /**
  * Created by lenovo on 2019/5/20.
@@ -37,5 +40,20 @@ public interface IUserService {
      */
     int updateUserCommit(int uid);
 
+    /**
+     * 完成游戏
+     * @param uid
+     * @return
+     */
+    int finishGame(int uid);
 
+
+    PageHolder<UserInvite> queryUserInvite(UserInviteQuery query);
+
+    /**
+     * 邀请用户数
+     * @param inviteUid
+     * @return
+     */
+    int inviteNum(int inviteUid,int status);
 }

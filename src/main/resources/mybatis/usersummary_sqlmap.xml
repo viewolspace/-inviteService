@@ -36,9 +36,9 @@
         #{useTimes},
         #{allTimes},
         #{grandPrize},
-        #{version},
         #{cTime},
-        #{mTime}
+        #{mTime},
+        #{version}
         )
 
         ON DUPLICATE KEY UPDATE times=times+1 , all_times=all_times+1 , version=version+1,m_time=#{mTime}
@@ -57,6 +57,11 @@
         where uid = #{uid} and times >= 1
     </update>
 
+
+    <update id="updateGrandPrize" parameterType="map">
+        update user_summary set grand_prize=#{grandPrize} , m_time=#{mTime}
+        where uid = #{uid}
+    </update>
 
 
 

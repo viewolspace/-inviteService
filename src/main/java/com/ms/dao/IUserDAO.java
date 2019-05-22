@@ -16,4 +16,7 @@ public interface IUserDAO {
 
     int updateCommitStatus(int uid,int commitStatus);
 
+
+    int updateGameResult(int uid,int gameResult);
+
 }
