@@ -1,0 +1,78 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+
+repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    /** Spring **/
+    compile 'aopalliance:aopalliance:1.0'
+    compile 'org.aspectj:aspectjweaver:1.8.5'
+    compile 'org.springframework:spring-core:4.3.10.RELEASE'
+    compile 'org.springframework:spring-context:4.3.10.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.3.10.RELEASE'
+    compile 'org.springframework:spring-orm:4.3.10.RELEASE'
+
+    
+    /** Common **/
+    compile 'commons-pool:commons-pool:1.6'
+
+    /** Json **/
+    compile 'com.alibaba:fastjson:1.2.5'
+
+    /** Log **/
+    compile 'org.slf4j:slf4j-log4j12:1.7.10'
+
+    compile 'org.apache.curator:curator-recipes:2.8.0'
+
+    compile 'net.coobird:thumbnailator:0.4.8'
+
+    
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+	
+    
+
+    /** mybatis **/
+    compile 'org.mybatis:mybatis:3.2.3'
+    compile 'org.mybatis:mybatis-spring:1.2.1'
+
+    /** jaxrs rest **/
+    compile 'org.jboss.resteasy:jaxrs-api:3.0.5.Final'
+    compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.5.Final'
+
+    
+
+    /** mysql **/
+    compile 'mysql:mysql-connector-java:5.1.19'
+
+    /** ucp - 3rd **/
+    testCompile 'junit:junit:4.12'
+
+    /** ucp - 3rd **/
+    compile 'javax.mail:mail:1.4.7'
+
+    /** 微信小程序Java SDK**/
+    compile group: 'com.github.binarywang', name: 'weixin-java-miniapp', version: '3.1.0'
+    /** 微信公众号Java SDK**/
+    compile group: 'com.github.binarywang', name: 'weixin-java-mp', version: '3.1.0'
+
+
+}
+
+
+apply from: 'common.gradle'
+
+

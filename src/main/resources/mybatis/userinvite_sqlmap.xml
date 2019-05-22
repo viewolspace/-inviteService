@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserInvite">
+
+    <sql id="selectCommon">
+
+			SELECT 	uid,
+                    third_id,
+                    open_id,
+                    nick_name,
+                    invite_uid,
+                    invite_third_id,
+                    invite_open_id,
+                    invite_nick_name,
+                    STATUS,
+                    c_time,
+                    m_time
+
+
+	</sql>
+
+    <insert id="insert" parameterType="UserInvite" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+
+        INSERT INTO user_invite
+        (
+        uid,
+        third_id,
+        open_id,
+        nick_name,
+        invite_uid,
+        invite_third_id,
+        invite_open_id,
+        invite_nick_name,
+        status,
+        c_time,
+        m_time
+        )
+        VALUES
+        (
+        #{uid},
+        #{thirdId},
+        #{openId},
+        #{nickName},
+        #{inviteUid},
+        #{inviteThirdId},
+        #{inviteOpenId},
+        #{inviteNickName},
+        #{status},
+        #{cTime},
+        #{mTime}
+        )
+
+    </insert>
+
+    <update id="update_status" parameterType="map">
+        update user_invite set status = #{status} , m_time=#{mTime} where uid = #{uid} and status != #{status}
+    </update>
+    
+
+    <select id="select" parameterType="int" resultType="UserInvite">
+        <include refid="selectCommon"/>
+        from user_invite a where uid = #{uid}
+    </select>
+
+    <select id="selectCount" parameterType="string" resultType="int">
+        select count(1)
+        from user_invite a where invite_uid = #{inviteUid}
+    </select>
+
+    <!--管理平台查询全部活动的接口-->
+    <sql id="sql_count">
+        select count(1)
+    </sql>
+    <sql id="sql_where">
+        FROM user_invite a
+        <where>
+            <if test="uid != null">
+                AND uid=#{uid}
+            </if>
+            <if test="openId != null and openId != ''">
+                open_id = #{openId}
+            </if>
+
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName}
+            </if>
+            <if test="inviteOpenId != null and inviteOpenId != ''">
+                invite_open_id = #{inviteOpenId}
+            </if>
+            <if test="inviteNickName != null and inviteNickName != ''">
+                invite_nick_name = #{inviteNickName}
+            </if>
+
+        </where>
+    </sql>
+    <sql id="sql_order">
+        order by s_time
+    </sql>
+
+    <select id="findByParams_count" parameterType="java.util.HashMap" resultType="int">
+        <include refid="sql_count" />
+        <include refid="sql_where" />
+    </select>
+    <select id="findByParams" parameterType="java.util.HashMap" resultType="UserInvite">
+        <include refid="selectCommon" />
+        <include refid="sql_where" />
+        <include refid="sql_order" />
+    </select>
+
+
+</mapper>

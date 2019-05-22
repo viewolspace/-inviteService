@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+
+    <sql id="selectCommon">
+
+			SELECT 	uid,
+                    open_id,
+                    third_id,
+                    game_result,
+                    commit_status,
+                    nick_name,
+                    head_pic,
+                    c_time,
+                    m_time
+
+	</sql>
+
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        <selectKey keyProperty="uid" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user
+        (
+        open_id,
+        third_id,
+        game_result,
+        commit_status,
+        nick_name,
+        head_pic,
+        c_time,
+        m_time
+        )
+        VALUES
+        (
+        #{openId},
+        #{thirdId},
+        #{gameResult},
+        #{commitStatus},
+        #{nickName},
+        #{headPic},
+        #{cTime},
+        #{mTime}
+        )
+
+    </insert>
+
+    <update id="update_commit_status" parameterType="map">
+        update user set commit_status = #{commitStatus} , m_time=#{mTime} where uid = #{uid} and commit_status != #{commitStatus}
+    </update>
+    
+
+    <select id="select" parameterType="int" resultType="User">
+        <include refid="selectCommon"/>
+        from user a where uid = #{uid}
+    </select>
+
+    <select id="selectByThird" parameterType="string" resultType="User">
+        <include refid="selectCommon"/>
+        from user a where third_id = #{thirdId}
+    </select>
+
+    <select id="selectByOpenId" parameterType="string" resultType="User">
+        <include refid="selectCommon"/>
+        from user a where open_id = #{openId}
+    </select>
+
+</mapper>

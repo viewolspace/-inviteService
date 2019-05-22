@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserSummary">
+
+    <sql id="selectCommon">
+
+			SELECT 	uid,
+                    times,
+                    use_times,
+                    all_times,
+                    grand_prize,
+                    c_time,
+                    m_time,
+                    version
+
+
+	</sql>
+
+    <insert id="insert" parameterType="UserSummary" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+
+        INSERT INTO user_summary
+        (
+        uid,
+        times,
+        use_times,
+        all_times,
+        grand_prize,
+        c_time,
+        m_time,
+        version
+        )
+        VALUES
+        (
+        #{uid},
+        #{times},
+        #{useTimes},
+        #{allTimes},
+        #{grandPrize},
+        #{version},
+        #{cTime},
+        #{mTime}
+        )
+
+        ON DUPLICATE KEY UPDATE times=times+1 , all_times=all_times+1 , version=version+1,m_time=#{mTime}
+
+    </insert>
+
+
+
+    <select id="select" parameterType="int" resultType="UserSummary">
+        <include refid="selectCommon"/>
+        from user_summary a where uid = #{uid}
+    </select>
+
+    <update id="useTimes" parameterType="map">
+        update user_summary set times=times - 1 ,use_times = use_times + 1 , m_time=#{mTime}
+        where uid = #{uid} and times >= 1
+    </update>
+
+
+
+
+</mapper>
