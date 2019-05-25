@@ -79,23 +79,23 @@ public class UserInviteQuery {
     }
 
 
-    public Map<String,Object> getMap(){
-        Map<String,Object> map = new HashMap<>();
-        if(uid!=null){
-            map.put("uid",uid);
+    public Map<String, Object> getMap() {
+        Map<String, Object> map = new HashMap<>();
+        if (uid != null && uid > 0) {
+            map.put("uid", uid);
         }
-        if(openId!=null){
-            map.put("openId",openId);
+        if (openId != null) {
+            map.put("openId", openId);
         }
-        if(nickName!=null){
-            map.put("nickName",nickName);
+        if (nickName != null) {
+            map.put("nickName", nickName);
         }
 
-        if(inviteOpenId!=null){
-            map.put("inviteOpenId",inviteOpenId);
+        if (inviteOpenId != null) {
+            map.put("inviteOpenId", inviteOpenId);
         }
-        if(inviteNickName!=null){
-            map.put("inviteNickName",inviteNickName);
+        if (inviteNickName != null) {
+            map.put("inviteNickName", inviteNickName);
         }
         return map;
     }

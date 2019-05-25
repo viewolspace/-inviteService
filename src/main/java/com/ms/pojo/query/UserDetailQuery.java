@@ -13,8 +13,8 @@ public class UserDetailQuery {
     private Integer prize;
     private String nickName;
 
-    private int pageIndex=1;
-    private int pageSize=20;
+    private int pageIndex = 1;
+    private int pageSize = 20;
 
     public Integer getUid() {
         return uid;
@@ -73,23 +73,23 @@ public class UserDetailQuery {
     }
 
 
-    public Map<String,Object> getMap(){
-        Map<String,Object> map = new HashMap<>();
-        if(uid!=null){
-            map.put("uid",uid);
+    public Map<String, Object> getMap() {
+        Map<String, Object> map = new HashMap<>();
+        if (uid != null && uid > 0) {
+            map.put("uid", uid);
         }
-        if(openId!=null){
-            map.put("openId",openId);
+        if (openId != null) {
+            map.put("openId", openId);
         }
-        if(nickName!=null){
-            map.put("nickName",nickName);
+        if (nickName != null) {
+            map.put("nickName", nickName);
         }
 
-        if(thirdId!=null){
-            map.put("thirdId",thirdId);
+        if (thirdId != null) {
+            map.put("thirdId", thirdId);
         }
-        if(prize!=null){
-            map.put("prize",prize);
+        if (prize != null) {
+            map.put("prize", prize);
         }
         return map;
     }

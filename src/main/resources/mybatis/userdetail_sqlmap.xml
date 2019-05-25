@@ -63,7 +63,7 @@
             <if test="thirdId != null and thirdId != ''">
                 third_id = #{thirdId}
             </if>
-            <if test="prize != null">
+            <if test="prize != null and prize > 0">
                 prize = #{prize}
             </if>
 
