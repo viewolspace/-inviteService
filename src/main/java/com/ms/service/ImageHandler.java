@@ -43,7 +43,7 @@ public class ImageHandler {
         Qrcode qrcode = new Qrcode();
         qrcode.setQrcodeErrorCorrect('H');//纠错等级（分为L、M、H三个等级）
         qrcode.setQrcodeEncodeMode('B');//N代表数字，A代表a-Z，B代表其它字符
-        qrcode.setQrcodeVersion(9);//版本
+        qrcode.setQrcodeVersion(5);//版本
         //生成二维码中要存储的信息
         String qrData = url;
 
@@ -176,7 +176,7 @@ public class ImageHandler {
 
         g2.drawImage(headImage(headPic, 108, 108), 318, 422, null);//322, 422
 
-        g2.drawImage(createQRCode(inviteUrl, 166, 165), 291, 797, null);
+        g2.drawImage(createQRCode(inviteUrl, 115, 115), 302, 808, 144, 143, null);//291, 797, 166, 165,
 
         //logo
         BufferedImage logo  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/logo.png"));
