@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  * Created by lenovo on 2019/5/23.
@@ -49,9 +50,9 @@ public class ImageHandler {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         //绘图
         Graphics2D gs = bufferedImage.createGraphics();
-        gs.setBackground(Color.BLACK);
+        gs.setBackground(new Color(254, 226, 192));
 
-        gs.setColor(new Color(254, 226, 192));//new Color(254,226,192)
+        gs.setColor(Color.BLACK);//new Color(254,226,192)
 
         gs.clearRect(0, 0, width, height);//清除下画板内容
 
@@ -165,14 +166,22 @@ public class ImageHandler {
             return imagePath + uid + ".png";
         }
 
+        Random ra =new Random();
+        int num = ra.nextInt(5) + 1;
+
         //如果多个改成随机数
-        BufferedImage hb  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/playbill.png")); //原图
+        BufferedImage hb  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/"+num+".png")); //原图
 
         Graphics2D g2 = hb.createGraphics();
 
-        g2.drawImage(headImage(headPic, 108, 108), 322, 538, null);
+        g2.drawImage(headImage(headPic, 108, 108), 318, 422, null);//322, 422
 
-        g2.drawImage(createQRCode(inviteUrl, 166, 165), 291, 885, null);
+        g2.drawImage(createQRCode(inviteUrl, 166, 165), 291, 797, null);
+
+        //logo
+        BufferedImage logo  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/logo.png"));
+        g2.drawImage(logo, 355, 862, null);
+
         try {
             // 输出图地址
             file = new File(imageSavePath);
