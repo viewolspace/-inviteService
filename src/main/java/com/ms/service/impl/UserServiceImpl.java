@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
         return userDAO.saveUser(user);
     }
 
-    @Transactional
+    @Transactional("msTX")
     @Override
     public int addUser(User user, int inviteUid) {
         //查询用户是否已存在
@@ -93,7 +93,7 @@ public class UserServiceImpl implements IUserService {
         return userDAO.getUserByOpenId(openId);
     }
 
-    @Transactional
+    @Transactional("msTX")
     @Override
     public int updateUserCommit(int uid) {
         int result = 0;

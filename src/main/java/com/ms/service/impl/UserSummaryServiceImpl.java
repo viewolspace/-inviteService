@@ -68,7 +68,7 @@ public class UserSummaryServiceImpl implements IUserSummaryService{
      * 0  未中奖
      * 1  中奖了
      */
-    @Transactional
+    @Transactional("msTX")
     @Override
     public int lottery(int uid) {
         //减少一次抽奖机会
