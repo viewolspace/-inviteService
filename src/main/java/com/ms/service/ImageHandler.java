@@ -158,7 +158,7 @@ public class ImageHandler {
 
 
 
-    public static String genPlaybill(int uid,String headPic) throws Exception{
+    public static String genPlaybill(int uid,String openId,String thirdId,String headPic) throws Exception{
 
         File file = new File(imageSavePath + uid + ".png");
 
@@ -176,7 +176,9 @@ public class ImageHandler {
 
         g2.drawImage(headImage(headPic, 108, 108), 318, 422, null);//322, 422
 
-        g2.drawImage(createQRCode(inviteUrl, 115, 115), 302, 808, 144, 143, null);//291, 797, 166, 165,
+        String url = inviteUrl + "?inviteOpenId=" + openId + "&inviteUserId=" + thirdId;
+
+        g2.drawImage(createQRCode(url, 115, 115), 302, 808, 144, 143, null);//291, 797, 166, 165,
 
         //logo
         BufferedImage logo  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/logo.png"));
@@ -200,7 +202,7 @@ public class ImageHandler {
 
     public static void main(String[] args) throws Exception{
 
-        genPlaybill(1,"d:\\2.jpg");
+        genPlaybill(1,"","","d:\\2.jpg");
 
 //        QRCode code = new QRCode()
 //
