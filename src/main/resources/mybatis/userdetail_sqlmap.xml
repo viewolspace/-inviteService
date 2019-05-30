@@ -63,7 +63,7 @@
             <if test="thirdId != null and thirdId != ''">
                 third_id = #{thirdId}
             </if>
-            <if test="prize != null and prize > 0">
+            <if test="prize != null">
                 prize = #{prize}
             </if>
 
@@ -78,7 +78,7 @@
         <include refid="sql_count" />
         <include refid="sql_where" />
     </select>
-    <select id="findByParams" parameterType="java.util.HashMap" resultType="UserInvite">
+    <select id="findByParams" parameterType="java.util.HashMap" resultType="UserDetail">
         <include refid="selectCommon" />
         <include refid="sql_where" />
         <include refid="sql_order" />
