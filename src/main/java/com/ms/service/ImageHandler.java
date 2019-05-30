@@ -1,6 +1,7 @@
 package com.ms.service;
 
 import com.swetake.util.Qrcode;
+import sun.font.FontDesignMetrics;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  * Created by lenovo on 2019/5/23.
@@ -38,20 +40,42 @@ public class ImageHandler {
         }
     }
 
+    public static int getWordWidth(Font font, String content) {
+        FontDesignMetrics metrics = FontDesignMetrics.getMetrics(font);
+        int width = 0;
+        for (int i = 0; i < content.length(); i++) {
+            width += metrics.charWidth(content.charAt(i));
+        }
+        return width;
+
+    }
+    //377 561
+    public static void drawString(Graphics2D gs,String name,int x,int y){
+
+        Font f = new Font("思源黑",Font.BOLD,36);
+        Color mycolor = new Color(254, 226, 192);//new Color(0, 0, 255);
+        gs.setColor(mycolor);
+        gs.setFont(f);
+        gs.drawString(name,x-(getWordWidth(f, name)/2),y);
+        gs.dispose();
+    }
+
     public static BufferedImage createQRCode(String url,int width,int height) throws Exception{
+        int n = 12;
         Qrcode qrcode = new Qrcode();
         qrcode.setQrcodeErrorCorrect('H');//纠错等级（分为L、M、H三个等级）
         qrcode.setQrcodeEncodeMode('B');//N代表数字，A代表a-Z，B代表其它字符
-        qrcode.setQrcodeVersion(9);//版本
+        qrcode.setQrcodeVersion(n);//版本
         //生成二维码中要存储的信息
         String qrData = url;
-
+        width = 67 + 12*(n-1);
+        height = 67 + 12*(n-1);
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         //绘图
         Graphics2D gs = bufferedImage.createGraphics();
-        gs.setBackground(Color.BLACK);
+        gs.setBackground(new Color(254, 226, 192));
 
-        gs.setColor(new Color(254, 226, 192));//new Color(254,226,192)
+        gs.setColor(Color.BLACK);//new Color(254,226,192)
 
         gs.clearRect(0, 0, width, height);//清除下画板内容
 
@@ -59,7 +83,7 @@ public class ImageHandler {
         int pixoff = 2;
 
         byte[] d = qrData.getBytes("gb2312");
-        if(d.length > 0 && d.length <120){
+        if(d.length > 0 && d.length <300){
             boolean[][] s = qrcode.calQrcode(d);
             for(int i=0;i<s.length;i++){
                 for(int j=0;j<s.length;j++){
@@ -157,7 +181,7 @@ public class ImageHandler {
 
 
 
-    public static String genPlaybill(int uid,String headPic) throws Exception{
+    public static String genPlaybill(int uid,String nickName,String openId,String thirdId,String headPic) throws Exception{
 
         File file = new File(imageSavePath + uid + ".png");
 
@@ -165,14 +189,29 @@ public class ImageHandler {
             return imagePath + uid + ".png";
         }
 
+        Random ra =new Random();
+        int num = ra.nextInt(5) + 1;
+
         //如果多个改成随机数
-        BufferedImage hb  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/playbill.png")); //原图
+        BufferedImage hb  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/"+num+".png")); //原图
 
         Graphics2D g2 = hb.createGraphics();
 
-        g2.drawImage(headImage(headPic, 108, 108), 322, 538, null);
+        g2.drawImage(headImage(headPic, 108, 108), 318, 422, null);//322, 422
 
-        g2.drawImage(createQRCode(inviteUrl, 166, 165), 291, 885, null);
+        String url = inviteUrl + "?inviteOpenId=" + openId + "&inviteUserId=" + thirdId;
+
+        System.out.println(url);
+
+        g2.drawImage(createQRCode(url, 115, 115), 302, 808, 144, 143, null);//291, 797, 166, 165,
+
+        //logo
+        BufferedImage logo  = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("playbill/logo.png"));
+        g2.drawImage(logo, 355, 862, null);
+
+
+        drawString(g2,nickName,375,575);//375*575
+
         try {
             // 输出图地址
             file = new File(imageSavePath);
@@ -191,7 +230,7 @@ public class ImageHandler {
 
     public static void main(String[] args) throws Exception{
 
-        genPlaybill(1,"d:\\2.jpg");
+        genPlaybill(1,"111","oraXTwrUF56x7p6C3EHq-ip-ufdg","oraXTwrUF56x7p6C3EHq-ip-ufdg","d:\\2.jpg");
 
 //        QRCode code = new QRCode()
 //
