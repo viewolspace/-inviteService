@@ -226,7 +226,9 @@ public class ImageHandler {
     }
 
 
-
+    public static String getInviteUrl() {
+        return inviteUrl;
+    }
 
     public static void main(String[] args) throws Exception{
 
