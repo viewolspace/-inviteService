@@ -116,6 +116,7 @@ public class UserServiceImpl implements IUserService {
                         //增加抽奖机会
                         userSummaryService.incTimes(userInvite.getUid());
                         userSummaryService.incTimes(userInvite.getInviteUid());
+                        result = 2;
                     }
                 }
             }

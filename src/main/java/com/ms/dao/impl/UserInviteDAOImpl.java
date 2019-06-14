@@ -42,7 +42,9 @@ public class UserInviteDAOImpl extends BaseDAO<UserInvite> implements IUserInvit
 
     @Override
     public int inviteNum(int inviteUid, int status) {
-
+        Map<String,Object> map = new HashMap<>();
+        map.put("inviteUid",inviteUid);
+        map.put("status",status);
         return super.count("selectCount",inviteUid);
     }
 
