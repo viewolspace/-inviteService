@@ -62,9 +62,9 @@
         from user_invite a where uid = #{uid}
     </select>
 
-    <select id="selectCount" parameterType="string" resultType="int">
+    <select id="selectCount" parameterType="map" resultType="int">
         select count(1)
-        from user_invite a where invite_uid = #{inviteUid}
+        from user_invite a where invite_uid = #{inviteUid} and status = #{status}
     </select>
 
     <!--管理平台查询全部活动的接口-->

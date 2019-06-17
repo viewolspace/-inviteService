@@ -45,7 +45,7 @@ public class UserInviteDAOImpl extends BaseDAO<UserInvite> implements IUserInvit
         Map<String,Object> map = new HashMap<>();
         map.put("inviteUid",inviteUid);
         map.put("status",status);
-        return super.count("selectCount",inviteUid);
+        return super.count("selectCount",map);
     }
 
     @Override
