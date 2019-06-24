@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
         User inviteUser = userDAO.getUser(inviteUid);
 
         //已经成交的用户 都是老用户 不记录绑定关系
-        if(inviteUser!=null && user.getCommitStatus()==User.COMMIT_NO){
+        if(inviteUser!=null && user.getCommitStatus()==User.COMMIT_NO && inviteUser.getCommitStatus()==User.COMMIT_YES){
             //绑定关系
             UserInvite userInvite = new UserInvite();
             userInvite.setUid(uid);
